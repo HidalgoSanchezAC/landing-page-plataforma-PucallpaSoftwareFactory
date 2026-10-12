@@ -1,12 +1,544 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola, estimado participante</title>
+    <title>Pucallpa Software Factory - Desarrollo de Software a la Medida en Ucayali</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        tech: {
+                            50: '#f0f9ff',
+                            500: '#0284c7',
+                            600: '#0369a1',
+                            900: '#0c4a6e',
+                            950: '#082f49',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+        .animate-float {
+            animation: float 5s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out infinite 2s;
+        }
+        .animate-pulse-slow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-light {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
 </head>
-<body>
-    <h1>Bienvenido a Git & Github</h1>
-    <p>En esta landing page encontraras mis servicios de Desarrollo de Software.</p>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-card bg-slate-950/80 border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#inicio" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-tech-500 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform duration-300">
+                        <i class="fa-solid font-mono text-lg">&lt;/&gt;</i>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold tracking-tight text-white block leading-none">Pucallpa</span>
+                        <span class="text-xs font-semibold text-brand-500 tracking-wider uppercase block">Software Factory</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#inicio" class="text-slate-300 hover:text-brand-500 transition-colors">Inicio</a>
+                    <a href="#caracteristicas" class="text-slate-300 hover:text-brand-500 transition-colors">Características</a>
+                    <a href="#ventajas" class="text-slate-300 hover:text-brand-500 transition-colors">Ventajas</a>
+                    <a href="#beneficios" class="text-slate-300 hover:text-brand-500 transition-colors">Beneficios</a>                    
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#contacto" class="relative inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-tech-600 rounded-xl shadow-lg shadow-brand-600/30 hover:shadow-brand-600/50 hover:scale-[1.02] active:scale-95 transition-all duration-200">
+                        Cotizar Proyecto
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" type="button" class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 focus:outline-none" aria-label="Abrir Menú">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <a href="#inicio" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Inicio</a>
+            <a href="#caracteristicas" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Características</a>
+            <a href="#ventajas" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Ventajas</a>
+            <a href="#beneficios" class="mobile-nav-link block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Beneficios</a>            
+            <a href="#contacto" class="mobile-nav-link block w-full text-center px-4 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-brand-600 to-tech-600 shadow-lg">
+                Cotizar Proyecto
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-500/15 rounded-full blur-3xl pointer-events-none animate-pulse-slow"></div>
+        <div class="absolute top-1/3 right-10 w-[400px] h-[400px] bg-tech-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Content -->
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-500 text-xs sm:text-sm font-semibold mb-6">
+                        <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-ping"></span>
+                        Transformación Digital en Ucayali &amp; Todo el Perú
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight mb-6">
+                        Desarrollo de Software <span class="bg-gradient-to-r from-brand-500 via-teal-400 to-tech-500 bg-clip-text text-transparent">a la Medida</span> para tu Empresa
+                    </h1>
+                    <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-8 font-normal leading-relaxed">
+                        Construimos sistemas web, aplicaciones móviles y soluciones digitales avanzadas diseñadas exactamente para automatizar tus procesos, aumentar tu productividad y escalar tu negocio sin límites.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#contacto" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-600 to-tech-600 text-white font-semibold text-base shadow-xl shadow-brand-600/30 hover:shadow-brand-600/50 hover:scale-[1.02] active:scale-95 transition-all text-center flex items-center justify-center gap-2">
+                            <span>Solicitar Cotización</span>
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </a>
+                        <a href="#caracteristicas" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 font-semibold text-base hover:bg-slate-800 hover:text-white transition-all text-center">
+                            Conocer Soluciones
+                        </a>
+                    </div>
+
+                    <!-- Trust indicators -->
+                    <div class="mt-10 pt-8 border-t border-slate-800/80 flex flex-wrap justify-center lg:justify-start items-center gap-6 text-slate-400 text-xs sm:text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved text-brand-500"></i>
+                            <span>Código Seguro &amp; Escusable</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-bolt text-brand-500"></i>
+                            <span>Entregas Ágiles</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-headset text-brand-500"></i>
+                            <span>Soporte Local Continuo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Floating Cards -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-square rounded-3xl bg-gradient-to-tr from-slate-900 via-slate-800 to-slate-900 border border-slate-700/60 p-6 shadow-2xl flex flex-col justify-between overflow-hidden">
+                        <!-- Code Visual Header -->
+                        <div class="flex items-center justify-between border-b border-slate-700/80 pb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                            </div>
+                            <span class="text-xs font-mono text-slate-400">PucallpaSoftwareFactory.pe</span>
+                        </div>
+
+                        <!-- Code Lines Mockup -->
+                        <div class="space-y-3 font-mono text-xs my-6 text-slate-300">
+                            <p><span class="text-purple-400">const</span> <span class="text-blue-400">empresa</span> = <span class="text-amber-300">'Tu Negocio'</span>;</p>
+                            <p><span class="text-purple-400">async function</span> <span class="text-emerald-400">transformarProcesos</span>() {</p>
+                            <p class="pl-4"><span class="text-slate-500">// Automatizando tareas repetitivas</span></p>
+                            <p class="pl-4"><span class="text-purple-400">await</span> factory.<span class="text-blue-300">buildSystem</span>({</p>
+                            <p class="pl-8 text-amber-200">scalability: <span class="text-brand-500">true</span>,</p>
+                            <p class="pl-8 text-amber-200">security: <span class="text-brand-500">'high'</span></p>
+                            <p class="pl-4">});</p>
+                            <p>}</p>
+                        </div>
+
+                        <!-- Badge Overlay Bottom -->
+                        <div class="bg-slate-950/80 border border-brand-500/40 p-4 rounded-2xl flex items-center gap-4">
+                            <div class="p-3 bg-brand-500/20 text-brand-500 rounded-xl">
+                                <i class="fa-solid fa-chart-line text-2xl"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-sm font-bold text-white">Eficiencia Operativa</h2>
+                                <p class="text-xs text-slate-400">Hasta +85% en optimización de tiempo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Floating Badge 1 -->
+                    <div class="absolute -top-6 -left-6 glass-card p-4 rounded-2xl border border-slate-700 shadow-2xl animate-float hidden sm:flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-tech-500/20 text-tech-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-laptop-code text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Desarrollo Web &amp; App</p>
+                            <p class="text-sm font-bold text-white">100% Personalizado</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge 2 -->
+                    <div class="absolute -bottom-6 -right-6 glass-card p-4 rounded-2xl border border-slate-700 shadow-2xl animate-float-delayed hidden sm:flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-server text-lg"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400">Arquitectura Nube</p>
+                            <p class="text-sm font-bold text-white">Escalabilidad Garantizada</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: Features (Características Clave) -->
+    <section id="caracteristicas" class="py-24 bg-slate-900/60 relative border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-semibold text-sm tracking-widest uppercase block mb-2">Lo Que Construimos</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Características Clave de Nuestros Servicios</h2>
+                <p class="text-slate-400 mt-4 text-base sm:text-lg">
+                    Diseñamos y programamos software robusto con estándares tecnológicos globales orientados a resultados tangibles.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-slate-950/80 p-8 rounded-2xl border border-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-brand-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-code"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Desarrollo 100% a la Medida</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Creamos sistemas web, aplicaciones móviles y software empresarial adaptados exactamente a la lógica y necesidades operativas de tu empresa.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-slate-950/80 p-8 rounded-2xl border border-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-tech-500/10 text-tech-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-tech-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Integración &amp; Automatización</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Conectamos tus plataformas existentes (ERP, CRM, pasarelas de pago, facturación electrónica y bases de datos) en un solo ecosistema.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-slate-950/80 p-8 rounded-2xl border border-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-rotate"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Desarrollo Ágil (Scrum)</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Trabajamos con sprints de entrega rápida y transparente. Obtén demos funcionales periódicas para supervisar tu proyecto en tiempo real.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-slate-950/80 p-8 rounded-2xl border border-slate-800 hover:border-brand-500/50 hover:shadow-xl hover:shadow-brand-500/10 transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-2xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Soporte &amp; Mantenimiento Local</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Ofrecemos atención cercana, capacitaciones constantes y mantenimiento continuo para garantizar la disponibilidad de tus sistemas 24/7.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: Advantages (Ventajas Competitivas) -->
+    <section id="ventajas" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Title Content -->
+                <div class="lg:col-span-5">
+                    <span class="text-tech-500 font-semibold text-sm tracking-widest uppercase block mb-2">¿Por Qué Elegirnos?</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-6">
+                        Ventajas de Trabajar con Pucallpa Software Factory
+                    </h2>
+                    <p class="text-slate-400 text-base leading-relaxed mb-8">
+                        Nos convertimos en tu socio tecnológico estratégico, brindando soluciones ágiles y a la medida que superan las limitaciones del software genérico.
+                    </p>
+                    <a href="#contacto" class="inline-flex items-center gap-2 text-brand-500 font-semibold hover:text-brand-400 transition-colors group">
+                        <span>Iniciar conversación técnica</span>
+                        <i class="fa-solid fa-arrow-right text-sm group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Right Advantages Cards Grid -->
+                <div class="lg:col-span-7 grid sm:grid-cols-2 gap-6">
+                    <!-- Advantage 1 -->
+                    <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-expand"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Adaptabilidad &amp; Escalabilidad</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            A diferencia del software comercial enlatado, tu plataforma se adapta y crece según evolucione tu modelo de negocio.
+                        </p>
+                    </div>
+
+                    <!-- Advantage 2 -->
+                    <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-tech-500/20 text-tech-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-cubes-stacked"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Centralización Operativa</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Elimina hojas de cálculo dispersas y procesos manuales, unificando la información de tu empresa en un solo lugar seguro.
+                        </p>
+                    </div>
+
+                    <!-- Advantage 3 -->
+                    <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Atención Cercana y Local</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Con presencia regional e ingeniería especializada, entendemos la realidad de tu sector y te brindamos respuesta inmediata.
+                        </p>
+                    </div>
+
+                    <!-- Advantage 4 -->
+                    <div class="p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 transition-all">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg mb-4">
+                            <i class="fa-solid fa-clock-fast"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Entregas Rápidas Sin Sorpresas</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            La metodología ágil permite probar funcionalidades reales desde las primeras semanas de desarrollo sin riesgos.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: Benefits (Beneficios para el Negocio) -->
+    <section id="beneficios" class="py-24 bg-gradient-to-b from-slate-900/80 to-slate-950 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-500 font-semibold text-sm tracking-widest uppercase block mb-2">Impacto Real</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">Beneficios Directos para tu Empresa</h2>
+                <p class="text-slate-400 mt-4 text-base sm:text-lg">
+                    Invertir en desarrollo de software exclusivo se traduce en retorno financiero e impulso competitivo.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Benefit 1 -->
+                <div class="relative group p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-brand-500/60 transition-all duration-300">
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-teal-300 mb-4">
+                        + ROI
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Reducción de Costos</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Maximizas el retorno de inversión eliminando cobros mensuales por licencias innecesarias y pagando solo por lo que usas.
+                    </p>
+                </div>
+
+                <!-- Benefit 2 -->
+                <div class="relative group p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-brand-500/60 transition-all duration-300">
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-tech-500 to-sky-300 mb-4">
+                        ⚡ 10x
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Aumento de Productividad</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Tu equipo ahorra horas de trabajo rutinario diario, permitiéndoles enfocar su tiempo en tareas estratégicas de alto valor.
+                    </p>
+                </div>
+
+                <!-- Benefit 3 -->
+                <div class="relative group p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-brand-500/60 transition-all duration-300">
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-green-300 mb-4">
+                        📊 Real-Time
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Toma de Decisiones Precisas</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Accede a reportes inteligentes, métricas clave y tableros interactivos para tomar decisiones informadas sobre tu negocio.
+                    </p>
+                </div>
+
+                <!-- Benefit 4 -->
+                <div class="relative group p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-brand-500/60 transition-all duration-300">
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-yellow-300 mb-4">
+                        🏆 Líder
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Ventaja Competitiva</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Destácate en el mercado ofreciendo una experiencia digital moderna, veloz y confiable a tus clientes finales.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Callout Banner -->
+            <div class="mt-16 rounded-3xl bg-gradient-to-r from-brand-900/60 via-slate-900 to-tech-900/60 border border-slate-700/60 p-8 sm:p-12 text-center relative overflow-hidden">
+                <div class="max-w-3xl mx-auto relative z-10">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-white mb-4">¿Listo para llevar tus procesos al siguiente nivel digital?</h3>
+                    <p class="text-slate-300 mb-8 text-base">Evaluemos la factibilidad técnica de tu idea sin compromiso.</p>
+                    <a href="#contacto" class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-slate-900 font-bold hover:bg-slate-100 transition-colors shadow-lg">
+                        <span>Agendar Asesoría Gratuita</span>
+                        <i class="fa-solid fa-calendar-check text-brand-600"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-slate-950 border-t border-slate-800/80 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <!-- Brand -->
+                <a href="#inicio" class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-500 to-tech-500 flex items-center justify-center text-white font-bold text-base">
+                        <i class="fa-solid font-mono text-xs">&lt;/&gt;</i>
+                    </div>
+                    <span class="text-base font-bold text-white tracking-tight">Pucallpa Software Factory</span>
+                </a>
+
+                <!-- Quick Navigation Links -->
+                <div class="flex flex-wrap justify-center gap-6 text-xs sm:text-sm text-slate-400">
+                    <a href="#inicio" class="hover:text-white transition-colors">Inicio</a>
+                    <a href="#caracteristicas" class="hover:text-white transition-colors">Características</a>
+                    <a href="#ventajas" class="hover:text-white transition-colors">Ventajas</a>
+                    <a href="#beneficios" class="hover:text-white transition-colors">Beneficios</a>
+                    <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+                </div>
+
+                <!-- Social links -->
+                <div class="flex items-center space-x-4 text-slate-400">
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center hover:text-brand-500 hover:border-brand-500/50 transition-colors" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin-in text-sm"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center hover:text-brand-500 hover:border-brand-500/50 transition-colors" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center hover:text-brand-500 hover:border-brand-500/50 transition-colors" aria-label="GitHub">
+                        <i class="fa-brands fa-github text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
+                &copy; <span id="year">2026</span> Pucallpa Software Factory. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Client Interactivity JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set dynamic current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Mobile menu toggle logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                if (isHidden) {
+                    mobileMenu.classList.remove('hidden');
+                    menuIcon.classList.remove('fa-bars');
+                    menuIcon.classList.add('fa-xmark');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                }
+            });
+
+            // Close mobile menu on nav link click
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    menuIcon.classList.remove('fa-xmark');
+                    menuIcon.classList.add('fa-bars');
+                });
+            });
+
+            // Form submission simulation
+            const contactForm = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const toastMessage = document.getElementById('toast-message');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Show loading state on button
+                const originalBtnContent = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner animate-spin text-lg"></i><span>Enviando...</span>';
+
+                // Simulate network request delay
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalBtnContent;
+                    
+                    // Display success toast notification
+                    toastMessage.classList.remove('hidden');
+                    contactForm.reset();
+
+                    // Hide toast notification after 5 seconds
+                    setTimeout(() => {
+                        toastMessage.classList.add('hidden');
+                    }, 5000);
+                }, 1200);
+            });
+        });
+    </script>
 </body>
 </html>
