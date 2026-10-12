@@ -18,6 +18,22 @@ git add .
 ```
 - El área de preparación es donde se preparan los cambios.
 
+## Paso 3
+- Registrar una descripción del cambio realizado.
+```
+git commit -m "Proyecto Base"
+```
+
+# Github
+-------
+```
+git remote add origin https://github.com/HidalgoSanchezAC/url_repositorio_remoto.git
+```
+
+- Enviar los cambios al repositorio remoto
+```
+git push origin master
+```
 -------
 #### EJEMPLO
 - Copiar el archivo (.env.exameple) a (.env) y actualizar las credenciales
